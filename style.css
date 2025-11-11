@@ -1,0 +1,268 @@
+:root{
+  /* design tokens */
+  --max-width:1100px;
+  --radius:10px;
+  --transition:200ms ease;
+
+  /* dark theme defaults */
+  --bg: #0f1724;
+  --panel: rgba(255,255,255,0.03);
+  --muted: #9fb0c1;
+  --text: #e6f2ff;
+  --brand: #d6a34a;
+  --accent: #0b2545;
+  --glass: rgba(255,255,255,0.06);
+  --link: #9bd1ff;
+}
+
+:root[data-theme="light"]{
+  --bg: #f7fafc;
+  --panel: #ffffff;
+  --muted: #475569;
+  --text: #0b2545;
+  --brand: #b07424;
+  --accent: #e6eef8;
+  --glass: rgba(2,6,23,0.04);
+  --link: #1a73e8;
+}
+
+/* base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+/* container */
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:2rem;
+}
+
+/* Header */
+.site-header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:60;
+  background:linear-gradient(180deg, rgba(11,37,69,0.6), rgba(11,37,69,0.18));
+  backdrop-filter: blur(6px);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.header-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0.6rem 1rem;
+}
+.brand{
+  font-weight:800;
+  color:var(--brand);
+  font-size:1.25rem;
+  text-decoration:none;
+}
+
+/* nav */
+.header-actions{ display:flex; gap:1rem; align-items:center;}
+.nav a{
+  color:var(--text);
+  margin-left:1rem;
+  text-decoration:none;
+  font-weight:600;
+  padding:0.35rem 0.5rem;
+  border-radius:8px;
+}
+.nav a.cta{
+  background:var(--brand);
+  color:#062033;
+  padding:.45rem .75rem;
+  border-radius:8px;
+}
+
+/* Theme toggle */
+.theme-toggle{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.06);
+  color:var(--text);
+  padding:.45rem .6rem;
+  border-radius:10px;
+  cursor:pointer;
+  display:inline-flex;
+  gap:0.4rem;
+  align-items:center;
+}
+.theme-toggle:focus{ outline:2px solid var(--link); outline-offset:3px; }
+
+/* Hero / Carousel */
+.hero{height:88vh; display:flex; align-items:center; justify-content:center; margin-top:66px;}
+.carousel{position:relative; width:100%; height:100%; overflow:hidden; border-radius:14px; box-shadow: 0 20px 40px rgba(2,6,23,0.6);}
+
+/* slides */
+.slides{height:100%; display:flex; transition:transform .7s var(--transition); position:relative;}
+.slide{
+  min-width:100%;
+  height:100%;
+  background-size:cover;
+  background-position:center;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.slide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(180deg, rgba(3,10,20,0.55) 0%, rgba(3,10,20,0.35) 40%, rgba(3,10,20,0.55) 100%);
+}
+.overlay{
+  position:relative;
+  z-index:2;
+  max-width:900px;
+  text-align:left;
+  padding:2rem;
+}
+.overlay h1{
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  margin:0 0 .5rem 0;
+  letter-spacing:-0.5px;
+}
+.overlay p{ color:var(--muted); margin:0 0 1.2rem 0; font-size:1rem}
+
+/* hero buttons */
+.btn{
+  display:inline-block;
+  text-decoration:none;
+  padding:.6rem 1rem;
+  border-radius:8px;
+  font-weight:700;
+  margin-right:.6rem;
+  border:0;
+  cursor:pointer;
+}
+.btn.primary{ background:var(--brand); color:#062033; }
+.btn.ghost{ background:transparent; border:1px solid rgba(255,255,255,0.12); color:var(--text); }
+
+/* controls */
+.carousel-controls{ position:absolute; bottom:18px; left:50%; transform:translateX(-50%); display:flex; gap:12px; align-items:center; z-index:10;}
+.carousel-controls button{ background:rgba(0,0,0,0.35); color:#fff; border:0; padding:.45rem .65rem; border-radius:8px; cursor:pointer; font-weight:700;}
+.indicators{ display:flex; gap:8px; align-items:center;}
+.indicators button{ width:10px; height:10px; border-radius:50%; border:0; background:rgba(255,255,255,0.25); cursor:pointer; }
+.indicators button.active{ background:var(--brand); }
+
+/* Services */
+.services{ padding:4rem 2rem; color:var(--text); text-align:center;}
+.services h2{ color:var(--brand); margin-bottom:1rem; }
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1rem; margin-top:1rem;}
+.card{ background:var(--panel); padding:1.4rem; border-radius:12px; text-align:left; box-shadow: 0 8px 20px rgba(2,6,23,0.15); color:var(--text);}
+
+/* About */
+.about .two-col{ display:flex; gap:2rem; align-items:center; flex-wrap:wrap; padding:4rem 2rem;}
+.about-image{ height:220px; flex:1; background-size:cover; background-position:center; border-radius:12px; min-width:260px; opacity:0.95;}
+
+/* stats */
+.stats{ list-style:none; padding:0; margin:1rem 0 0 0; display:flex; gap:1.2rem; flex-wrap:wrap;}
+.stats li{ background:var(--panel); padding:.6rem .9rem; border-radius:10px; font-weight:700; color:var(--text);}
+
+/* testimonials & faq */
+.testimonials blockquote{ background:var(--panel); padding:1rem; border-radius:12px; margin:1rem 0; color:var(--text); }
+.faq details{ background:var(--panel); padding:0.8rem; border-radius:8px; margin:0.6rem 0; }
+
+/* partners */
+.partners .partner-logos{ display:flex; gap:1rem; align-items:center; padding:1rem 0; }
+.partners .logo{ background:var(--panel); padding:1rem 1.4rem; border-radius:8px; color:var(--text); }
+
+/* Contact */
+.contact{ padding:4rem 2rem;}
+.contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:2rem; align-items:start;}
+.contact-details{ background:var(--panel); padding:1.2rem; border-radius:12px; color:var(--text);}
+.contact-form-wrap{ background:var(--panel); padding:1rem; border-radius:12px;}
+
+.contact-form{ display:grid; gap:.8rem; max-width:650px;}
+.contact-form label{ display:block; color:var(--text); font-weight:600;}
+.contact-form input, .contact-form textarea, .contact-form select{ padding:.6rem .8rem; border-radius:8px; border:0; background:rgba(255,255,255,0.02); color:var(--text); }
+.form-actions{ display:flex; gap:0.6rem; margin-top:0.6rem; align-items:center; }
+.form-notice{ margin-top:0.6rem; color:var(--muted); }
+
+/* footer */
+.site-footer{ padding:1rem 0; background:linear-gradient(180deg, rgba(3,10,20,0.6), rgba(3,10,20,0.9)); color:var(--muted);}
+.footer-inner{ display:flex; justify-content:space-between; align-items:center; max-width:var(--max-width); margin:0 auto; padding:0 2rem;}
+
+/* small utilities */
+a{ color:var(--link); }
+@media (max-width:900px){
+  .overlay{text-align:center}
+  .about .two-col{flex-direction:column-reverse}
+  .contact-grid{ grid-template-columns:1fr; }
+  .carousel-controls{ bottom:12px; }
+}
+
+
+
+
+
+
+
+/* Additions / small changes to support <img>/<picture> usage in slides */
+/* (This file is intended to replace or be merged with your existing css/styles.css) */
+
+.slide{
+  position:relative;
+  min-width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+/* Make the picture/img fill the slide and sit below the overlay */
+.slide picture,
+.slide img {
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+  z-index:1;
+}
+
+/* Keep the existing gradient overlay (if present) */
+.slide::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  /* gentle dark gradient for legibility over images */
+  background: linear-gradient(180deg, rgba(3,10,20,0.55) 0%, rgba(3,10,20,0.35) 40%, rgba(3,10,20,0.55) 100%);
+  z-index:1;
+}
+
+/* overlay content sits above the image+gradient */
+.overlay{
+  position:relative;
+  z-index:2;
+  max-width:900px;
+  text-align:left;
+  padding:2rem;
+  color:var(--text);
+}
+
+/* ensure picture doesn't cause layout shift when lazy loading:
+   set explicit min-height on carousel container if needed (optional)
+*/
+.carousel{ min-height: 420px; }
+
+/* Small responsive tweak */
+@media (max-width:800px){
+  .overlay { padding:1rem; }
+}
